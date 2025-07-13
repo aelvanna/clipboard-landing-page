@@ -1,18 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+button {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+button:hover, button:focus-visible {
+  filter: opacity(0.8);
+}
+button.ios-download {
+  background-color: hsl(171, 66%, 44%);
+  color: white;
+  box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+}
+button.mac-download {
+  background-color: hsl(233, 100%, 69%);
+  color: white;
+  box-shadow: 0 3px 0 hsl(233, 60%, 55%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+}
+
 html {
   font-family: "Bai Jamjuree", sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
   /* Set Fluid Font-size*/
   font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  overflow-x: hidden;
 }
 
 body {
   background-image: url("../images/bg-header-mobile.png");
-  background-size: 100% auto;
+  background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
   text-align: center;
+}
+@media (min-width: 768px) {
+  body {
+    background-image: url("../images/bg-header-desktop.png");
+  }
 }
 
 * {
@@ -24,13 +54,14 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  place-content: center;
-  padding: 0 2rem; /* Adds horizontal spacing for all content */
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
 }
 
 header {
-  padding-top: 8.125rem; /* 130px */
-  padding-bottom: 3.75rem; /* 60px */
+  padding-top: 8.125rem;
+  padding-bottom: 3.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,11 +76,22 @@ h1 {
   padding-bottom: 1.5rem;
   color: hsl(210, 10%, 33%);
 }
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.875rem;
+    max-width: 45rem;
+  }
+}
 
 h2 {
   font-size: 1.875rem;
   color: hsl(210, 10%, 33%);
   margin-bottom: 1.25rem;
+}
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2.25rem;
+  }
 }
 
 h3 {
@@ -66,34 +108,10 @@ p {
 .download-buttons {
   display: flex;
   flex-direction: column;
-  row-gap: 2rem;
-  margin-bottom: 10rem;
-}
-
-button {
-  font-family: "Bai Jamjuree", sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-button:hover, button:focus-visible {
-  filter: opacity(0.6);
-}
-button.ios-download {
-  background-color: hsl(171, 66%, 44%);
-  color: white;
-  box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
-}
-button.mac-download {
-  background-color: hsl(233, 100%, 69%);
-  color: white;
-  box-shadow: 0 3px 0 hsl(233, 60%, 55%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 ul {
@@ -129,20 +147,50 @@ img {
   margin-bottom: 3rem;
 }
 
+.features-split ul li .list-item {
+  margin-bottom: 5rem;
+}
+
 .features-list {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 3rem;
   text-align: center;
   margin: 5rem 0;
+}
+@media (min-width: 768px) {
+  .features-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .features-list li {
+    max-width: 22rem;
+  }
 }
 
 .partners-list {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 4rem;
   margin: 5rem 0;
+}
+@media (min-width: 768px) {
+  .partners-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
 }
 
 .clipboard-platforms {
@@ -162,12 +210,9 @@ footer a {
   text-decoration: none;
   color: hsl(210, 10%, 33%);
 }
-footer a:focus-visible {
-  outline: 2px solid hsl(171, 66%, 44%);
-  outline-offset: 2px;
-}
 footer a:hover,
-footer a:focus {
+footer a:focus,
+footer a:focus-visible {
   color: hsl(171, 66%, 44%);
 }
 footer ul {
@@ -186,32 +231,4 @@ footer ul li {
 
 .attribution a {
   color: hsl(228, 45%, 44%);
-}
-
-@media only screen and (min-width: 768px) {
-  body {
-    background-image: url("../images/bg-header-desktop.png");
-  }
-  h1 {
-    font-size: 2.875rem;
-    max-width: 45rem;
-  }
-  .features-list,
-  .partners-list {
-    flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .features-list li {
-    max-width: 22rem;
-  }
-  h1 {
-    font-size: 2.875rem;
-    max-width: 45rem;
-  }
-  h2 {
-    font-size: 2.25rem;
-  }
-}
-
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */

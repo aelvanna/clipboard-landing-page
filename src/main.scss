@@ -1,20 +1,11 @@
 //========================================================================
 // Configuration
 //========================================================================
+@use "variables" as *;
+@use "buttons";
+@use "mixins";
 
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-
-// Colour Variables //
-
-$green-500: hsl(171, 66%, 44%);
-$blue-100: hsl(233, 100%, 69%);
-$grey-100: hsl(220, 16%, 96%);
-$grey-700: hsl(210, 10%, 33%);
-$grey-500: hsl(201, 11%, 66%);
-$attribution-link-color: hsl(228, 45%, 44%);
-
-// Typography //
-$font-stack: "Bai Jamjuree", sans-serif;
 
 html {
   font-family: $font-stack;
@@ -23,14 +14,19 @@ html {
 
   /* Set Fluid Font-size*/
   font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  overflow-x: hidden;
 }
 
 body {
   background-image: url("../images/bg-header-mobile.png");
-  background-size: 100% auto;
+  background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
   text-align: center;
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    background-image: url("../images/bg-header-desktop.png");
+  }
 }
 
 * {
@@ -40,19 +36,14 @@ body {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  place-content: center;
-  padding: 0 2rem; /* Adds horizontal spacing for all content */
+  @include mixins.flex-center(column);
+  padding: 0 2rem;
 }
 
 header {
-  padding-top: 8.125rem; /* 130px */
-  padding-bottom: 3.75rem; /* 60px */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding-top: 8.125rem;
+  padding-bottom: 3.75rem;
+  @include mixins.flex-center(column);
 
   .logo {
     padding-bottom: 4rem;
@@ -63,12 +54,21 @@ h1 {
   font-size: 2.375rem;
   padding-bottom: 1.5rem;
   color: $grey-700;
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    font-size: 2.875rem;
+    max-width: 45rem;
+  }
 }
 
 h2 {
   font-size: 1.875rem;
   color: $grey-700;
   margin-bottom: 1.25rem;
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    font-size: 2.25rem;
+  }
 }
 
 h3 {
@@ -83,40 +83,9 @@ p {
 }
 
 .download-buttons {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  margin-bottom: 10rem;
-}
-
-button {
-  font-family: $font-stack;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  margin-left: 2rem;
-  margin-right: 2rem;
-
-  &:hover,
-  &:focus-visible {
-    filter: opacity(0.6);
-  }
-
-  &.ios-download {
-    background-color: $green-500;
-    color: white;
-    box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
-  }
-
-  &.mac-download {
-    background-color: $blue-100;
-    color: white;
-    box-shadow: 0 3px 0 hsl(233, 60%, 55%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
-  }
+  @include mixins.flex-center(column);
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 ul {
@@ -156,20 +125,43 @@ img {
   }
 }
 
+.features-split {
+  ul {
+    li {
+      .list-item {
+        margin-bottom: 5rem;
+      }
+    }
+  }
+}
+
 .features-list {
-  display: flex;
-  flex-direction: column;
+  @include mixins.flex-center(column);
   gap: 3rem;
   text-align: center;
   margin: 5rem 0;
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    @include mixins.flex-center(row);
+    gap: 2rem;
+  }
+
+  li {
+    @include mixins.breakpoint($breakpoint-tablet) {
+      max-width: 22rem;
+    }
+  }
 }
 
 .partners-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include mixins.flex-center(column);
   gap: 4rem;
   margin: 5rem 0;
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    @include mixins.flex-center(row);
+    gap: 2rem;
+  }
 }
 
 .clipboard-platforms {
@@ -191,13 +183,9 @@ footer {
     color: $grey-700;
   }
 
-  a:focus-visible {
-    outline: 2px solid $green-500;
-    outline-offset: 2px;
-  }
-
   a:hover,
-  a:focus {
+  a:focus,
+  a:focus-visible {
     color: $green-500;
   }
 
@@ -218,34 +206,4 @@ footer {
 }
 .attribution a {
   color: $attribution-link-color;
-}
-
-@media only screen and (min-width: 768px) {
-  body {
-    background-image: url("../images/bg-header-desktop.png");
-  }
-
-  h1 {
-    font-size: 2.875rem;
-    max-width: 45rem;
-  }
-
-  .features-list,
-  .partners-list {
-    flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  .features-list li {
-    max-width: 22rem;
-  }
-
-  h1 {
-    font-size: 2.875rem;
-    max-width: 45rem;
-  }
-  h2 {
-    font-size: 2.25rem;
-  }
 }
