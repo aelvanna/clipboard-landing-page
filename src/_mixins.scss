@@ -6,8 +6,14 @@
   align-items: center;
 }
 
-@mixin breakpoint($size) {
-  @media (min-width: $size) {
-    @content;
+@mixin breakpoint($min, $max: null) {
+  @if $max {
+    @media (min-width: $min) and (max-width: ($max - 1px)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
   }
 }
