@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "sass:color";
 
 //========================================================================
 // Buttons
@@ -13,21 +14,29 @@ button {
   border: none;
   border-radius: 2rem;
   cursor: pointer;
-
-  &:hover,
-  &:focus-visible {
-    filter: opacity(0.8);
-  }
+  transition: background-color 0.15s ease-out;
 
   &.ios-download {
     background-color: $green-500;
     color: white;
-    box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+    box-shadow: 0 3px 0 color.adjust($green-500, $lightness: -9%),
+      0 15px 30px hsla(210, 10%, 33%, 0.2);
+
+    &:hover,
+    &:focus-visible {
+      background-color: color.adjust($green-500, $lightness: 8%);
+    }
   }
 
   &.mac-download {
     background-color: $blue-100;
     color: white;
-    box-shadow: 0 3px 0 hsl(233, 60%, 55%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+    box-shadow: 0 3px 0 color.adjust($blue-100, $lightness: -14%),
+      0 15px 30px hsla(210, 10%, 33%, 0.2);
+
+    &:hover,
+    &:focus-visible {
+      background-color: color.adjust($blue-100, $lightness: 8%);
+    }
   }
 }

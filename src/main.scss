@@ -370,7 +370,7 @@ footer {
 
   .attribution {
     font-size: 0.688rem;
-    text-align: center;
+    text-align: left;
     color: $grey-700;
     margin-top: 2rem;
 
@@ -380,7 +380,6 @@ footer {
 
     @include mixins.breakpoint($breakpoint-tablet) {
       grid-area: attribution;
-      text-align: left;
       margin-top: 0;
     }
   }

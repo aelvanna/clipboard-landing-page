@@ -8,19 +8,23 @@ button {
   border: none;
   border-radius: 2rem;
   cursor: pointer;
-}
-button:hover, button:focus-visible {
-  filter: opacity(0.8);
+  transition: background-color 0.15s ease-out;
 }
 button.ios-download {
   background-color: hsl(171, 66%, 44%);
   color: white;
-  box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 15px 30px hsla(210, 10%, 33%, 0.2);
+}
+button.ios-download:hover, button.ios-download:focus-visible {
+  background-color: hsl(171, 66%, 52%);
 }
 button.mac-download {
   background-color: hsl(233, 100%, 69%);
   color: white;
-  box-shadow: 0 3px 0 hsl(233, 60%, 55%), 0 5px 10px hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 3px 0 hsl(233, 100%, 55%), 0 15px 30px hsla(210, 10%, 33%, 0.2);
+}
+button.mac-download:hover, button.mac-download:focus-visible {
+  background-color: hsl(233, 100%, 77%);
 }
 
 /* Styling */
@@ -406,7 +410,7 @@ footer .social-links li {
 }
 footer .attribution {
   font-size: 0.688rem;
-  text-align: center;
+  text-align: left;
   color: hsl(210, 10%, 33%);
   margin-top: 2rem;
 }
@@ -416,7 +420,6 @@ footer .attribution a {
 @media (min-width: 768px) {
   footer .attribution {
     grid-area: attribution;
-    text-align: left;
     margin-top: 0;
   }
 }
