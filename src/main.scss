@@ -73,11 +73,10 @@ h1 {
   font-size: 2.375rem;
   padding-bottom: 1.5rem;
   color: $grey-700;
-  max-width: 45rem;
 
   @include mixins.breakpoint($breakpoint-tablet) {
     font-size: 2.875rem;
-    max-width: 50rem;
+    max-width: 45rem;
   }
 }
 
@@ -113,15 +112,15 @@ p {
   }
 }
 
-img {
-  max-width: 100%;
-}
-
 .snippets-section {
   margin-bottom: 5rem;
 
   @include mixins.breakpoint($breakpoint-tablet) {
     max-width: 40rem;
+  }
+
+  @include mixins.breakpoint($breakpoint-desktop) {
+    margin-bottom: 9rem;
   }
 }
 
@@ -134,16 +133,21 @@ img {
   }
 
   img {
+    max-width: 100%;
     margin-bottom: 3rem;
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
-    margin-top: 6rem;
+    margin-top: 12rem;
     max-width: 40rem;
   }
 }
 
 .features-split {
+  img {
+    max-width: 100%;
+  }
+
   .features-split__list {
     list-style: none;
     padding: 0;
@@ -154,18 +158,23 @@ img {
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
+    position: relative;
     display: flex;
     align-items: center;
 
     img {
-      position: relative;
-      left: -4rem;
-      flex: 0 1 50%;
+      position: absolute;
+      right: 100%;
+      margin-right: -10.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: none;
     }
 
     .features-split__list {
-      max-width: 25rem;
+      max-width: 21.875rem;
       text-align: left;
+      transform: translateX(17rem);
       li {
         padding: 1rem 0;
       }
@@ -186,14 +195,30 @@ img {
     gap: 2rem;
   }
 
+  img {
+    height: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
   li {
-    padding: 2rem;
+    @include mixins.breakpoint($breakpoint-mobile) {
+      padding: 2rem;
+    }
     @include mixins.breakpoint($breakpoint-tablet) {
+      padding: 1rem;
+      padding-top: 0rem;
       max-width: 22rem;
     }
 
     @include mixins.breakpoint($breakpoint-desktop) {
       max-width: 24rem;
+    }
+
+    &:last-child p {
+      @include mixins.breakpoint($breakpoint-desktop) {
+        max-width: 20rem;
+        margin-inline: auto;
+      }
     }
   }
 }
@@ -205,14 +230,8 @@ img {
   gap: 4rem;
   margin: 5rem 0;
 
-  @include mixins.breakpoint($breakpoint-tablet) {
-    @include mixins.flex-center(row);
-    gap: 6rem;
-    flex-wrap: wrap;
-
-    img {
-      width: 8rem;
-    }
+  img {
+    width: 8rem;
   }
 
   li {
@@ -220,6 +239,12 @@ img {
     @include mixins.breakpoint($breakpoint-tablet) {
       padding: 0;
     }
+  }
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    @include mixins.flex-center(row);
+    gap: 6rem;
+    flex-wrap: wrap;
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
@@ -240,8 +265,31 @@ footer {
   padding: 3rem 2rem;
   margin-top: 10rem;
 
+  // Tablet & Desktop Grid Layout
+  @include mixins.breakpoint($breakpoint-tablet) {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-areas:
+      "logo nav social"
+      "attribution attribution attribution";
+    align-items: center;
+    column-gap: 2.5rem;
+    row-gap: 2rem;
+    padding: 2rem 4rem;
+    margin-top: 2rem;
+  }
+
+  @include mixins.breakpoint($breakpoint-desktop) {
+    padding: 2rem 8rem;
+    column-gap: 6rem;
+  }
+
   .footer-logo {
     width: 5rem;
+    @include mixins.breakpoint($breakpoint-tablet) {
+      width: 3rem;
+      grid-area: logo;
+    }
   }
 
   a {
@@ -255,6 +303,12 @@ footer {
     }
   }
 
+  .footer-nav {
+    @include mixins.breakpoint($breakpoint-tablet) {
+      grid-area: nav;
+    }
+  }
+
   .footer-nav ul,
   .social-links {
     list-style: none;
@@ -264,16 +318,52 @@ footer {
 
   .footer-nav ul {
     padding-top: 2rem;
+
+    @include mixins.breakpoint($breakpoint-tablet) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding-top: 0;
+      text-align: left;
+    }
+
+    @include mixins.breakpoint($breakpoint-desktop) {
+      justify-content: start;
+      column-gap: 4rem;
+      row-gap: 1.5rem;
+    }
+
     li {
       padding: 1rem;
+      @include mixins.breakpoint($breakpoint-tablet) {
+        padding: 0;
+        a {
+          white-space: nowrap;
+        }
+      }
     }
   }
 
   .social-links {
     padding-top: 2rem;
+
+    @include mixins.breakpoint($breakpoint-tablet) {
+      grid-area: social;
+      padding-top: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+
     li {
       display: inline;
       padding: 1rem;
+      @include mixins.breakpoint($breakpoint-tablet) {
+        padding: 0;
+      }
+    }
+
+    @include mixins.breakpoint($breakpoint-desktop) {
+      justify-self: flex-end;
     }
   }
 
@@ -286,62 +376,8 @@ footer {
     a {
       color: $attribution-link-color;
     }
-  }
 
-  // Tablet & Desktop Layout
-  @include mixins.breakpoint($breakpoint-tablet) {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas:
-      "logo nav social"
-      "attribution attribution attribution";
-    align-items: start;
-    column-gap: 2.5rem;
-    row-gap: 3rem;
-    padding: 2rem 4rem;
-    margin-top: 2rem;
-
-    @include mixins.breakpoint($breakpoint-desktop) {
-      padding: 2rem 8rem;
-      column-gap: 4rem;
-    }
-
-    .footer-logo {
-      grid-area: logo;
-      margin-top: 0.25rem;
-    }
-
-    .footer-nav {
-      grid-area: nav;
-      align-self: center;
-      ul {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem 1rem;
-        padding-top: 0;
-        text-align: left;
-        li {
-          padding: 0;
-          a {
-            white-space: nowrap;
-          }
-        }
-      }
-    }
-
-    .social-links {
-      grid-area: social;
-      padding-top: 0;
-      align-self: center;
-      display: flex;
-      margin: 0;
-      gap: 1.5rem;
-      li {
-        padding: 0;
-      }
-    }
-
-    .attribution {
+    @include mixins.breakpoint($breakpoint-tablet) {
       grid-area: attribution;
       text-align: left;
       margin-top: 0;
