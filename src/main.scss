@@ -158,23 +158,18 @@ p {
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
-    position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
 
     img {
-      position: absolute;
-      right: 100%;
-      margin-right: -10.875rem;
-      top: 50%;
-      transform: translateY(-50%);
-      max-width: none;
+      justify-self: end;
+      transform: translateX(-20%);
     }
 
     .features-split__list {
       max-width: 21.875rem;
       text-align: left;
-      transform: translateX(17rem);
       li {
         padding: 1rem 0;
       }
@@ -201,9 +196,7 @@ p {
   }
 
   li {
-    @include mixins.breakpoint($breakpoint-mobile) {
-      padding: 2rem;
-    }
+    padding: 2rem;
     @include mixins.breakpoint($breakpoint-tablet) {
       padding: 1rem;
       padding-top: 0rem;
@@ -370,7 +363,7 @@ footer {
 
   .attribution {
     font-size: 0.688rem;
-    text-align: left;
+    text-align: center;
     color: $grey-700;
     margin-top: 2rem;
 
