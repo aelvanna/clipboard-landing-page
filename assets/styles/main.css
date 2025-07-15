@@ -362,6 +362,7 @@ footer .footer-nav ul {
 }
 @media (min-width: 1440px) {
   footer .footer-nav ul {
+    grid-template-columns: repeat(3, auto);
     justify-content: start;
     column-gap: 4rem;
     row-gap: 1.5rem;
@@ -400,7 +401,7 @@ footer .social-links li {
 }
 @media (min-width: 1440px) {
   footer .social-links {
-    justify-self: flex-end;
+    justify-self: end;
   }
 }
 footer .attribution {

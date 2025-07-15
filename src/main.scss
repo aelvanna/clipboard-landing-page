@@ -328,6 +328,7 @@ footer {
     }
 
     @include mixins.breakpoint($breakpoint-desktop) {
+      grid-template-columns: repeat(3, auto);
       justify-content: start;
       column-gap: 4rem;
       row-gap: 1.5rem;
@@ -363,7 +364,7 @@ footer {
     }
 
     @include mixins.breakpoint($breakpoint-desktop) {
-      justify-self: flex-end;
+      justify-self: end;
     }
   }
 
