@@ -37,16 +37,9 @@ h1 {
   font-size: 2.375rem;
   padding-bottom: 1.5rem;
   color: $grey-700;
-
-  @include mixins.breakpoint($breakpoint-tablet) {
-    font-size: 2.875rem;
-    max-width: 45rem;
-  }
 }
-
 h2 {
   font-size: 1.875rem;
-  color: $grey-700;
   margin-bottom: 1.25rem;
 
   @include mixins.breakpoint($breakpoint-tablet) {
@@ -67,10 +60,12 @@ p {
 
 header {
   padding-top: 8.125rem;
-  padding-bottom: 3.75rem;
+  padding-bottom: 3rem;
   @include mixins.flex-center(column);
   position: relative;
 
+  // Positions header bg image and ensures that it is
+  // not hidden below white bg
   &::before {
     content: "";
     position: absolute;
@@ -84,31 +79,43 @@ header {
     background-size: 100%;
     background-position: top center;
     background-repeat: no-repeat;
-
-    @include mixins.breakpoint($breakpoint-tablet) {
-      background-image: url("../images/bg-header-desktop.png");
-    }
+    // Add mask to bg image
+    // Creates a soft fade-out effect on the bottom
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
+}
 
-  .logo {
-    padding-bottom: 4rem;
+@include mixins.breakpoint($breakpoint-tablet) {
+  header p {
+    max-width: 38rem;
   }
+  header::before {
+    background-image: url("../images/bg-header-desktop.png");
+  }
+}
 
-  p {
-    @include mixins.breakpoint($breakpoint-tablet) {
-      max-width: 38rem;
-    }
-  }
+.logo {
+  padding-bottom: 4rem;
 }
 
 .download-buttons {
   @include mixins.flex-center(column);
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 10rem;
+
+  button {
+    width: 100%;
+  }
 
   @include mixins.breakpoint($breakpoint-tablet) {
     flex-direction: row;
-    margin-bottom: 8rem;
+    margin-bottom: 10rem;
+    width: auto;
+    button {
+      width: auto;
+    }
   }
 }
 
@@ -151,11 +158,6 @@ header {
   text-align: center;
   margin: 5rem 0;
 
-  @include mixins.breakpoint($breakpoint-tablet) {
-    @include mixins.flex-center(row);
-    gap: 2rem;
-  }
-
   img {
     height: 2.5rem;
     margin-bottom: 2rem;
@@ -163,22 +165,29 @@ header {
 
   li {
     padding: 2rem;
-    @include mixins.breakpoint($breakpoint-tablet) {
-      padding: 1rem;
-      padding-top: 0rem;
-      max-width: 22rem;
-    }
+  }
+}
 
-    @include mixins.breakpoint($breakpoint-desktop) {
-      max-width: 24rem;
-    }
+@include mixins.breakpoint($breakpoint-tablet) {
+  .features-list {
+    @include mixins.flex-center(row);
+    gap: 2rem;
+  }
 
-    &:last-child p {
-      @include mixins.breakpoint($breakpoint-desktop) {
-        max-width: 20rem;
-        margin-inline: auto;
-      }
-    }
+  .features-list__item {
+    padding: 1rem 1rem 1rem 0;
+    max-width: 22rem;
+  }
+}
+
+@include mixins.breakpoint($breakpoint-desktop) {
+  .features-list__item {
+    max-width: 24rem;
+  }
+
+  .features-list__description--last {
+    max-width: 20rem;
+    margin-inline: auto;
   }
 }
 
@@ -195,29 +204,75 @@ header {
 
   li {
     padding: 2rem;
-    @include mixins.breakpoint($breakpoint-tablet) {
-      padding: 0;
-    }
   }
+}
 
-  @include mixins.breakpoint($breakpoint-tablet) {
+@include mixins.breakpoint($breakpoint-tablet) {
+  .partners-list {
     @include mixins.flex-center(row);
     gap: 6rem;
     flex-wrap: wrap;
   }
+}
 
-  @include mixins.breakpoint($breakpoint-desktop) {
+@include mixins.breakpoint($breakpoint-desktop) {
+  .partners-list {
     margin-bottom: 7rem;
   }
 }
 
-footer {
+.footer {
   background-color: $grey-100;
   padding: 3rem 2rem;
   margin-top: 10rem;
 
-  // Tablet & Desktop Grid Layout
-  @include mixins.breakpoint($breakpoint-tablet) {
+  .footer__logo {
+    width: 5rem;
+  }
+
+  &__attribution {
+    font-size: 0.688rem;
+    text-align: center;
+    color: $grey-700;
+    margin-top: 2rem;
+    .attribution__link {
+      color: $attribution-link-color;
+    }
+  }
+
+  .footer__nav-link {
+    text-decoration: none;
+    color: $grey-700;
+    &:hover,
+    &:focus-visible {
+      color: $green-500;
+    }
+  }
+
+  &__social {
+    padding: 0;
+    padding-top: 2rem;
+    list-style: none;
+    text-align: center;
+  }
+
+  &__social-item {
+    display: inline;
+    padding: 1rem;
+  }
+
+  &__nav-list {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    @include mixins.flex-center($direction: column);
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+}
+
+@include mixins.breakpoint($breakpoint-tablet) {
+  .footer {
     display: grid;
     grid-template-columns: auto auto 1fr;
     grid-template-areas:
@@ -230,109 +285,63 @@ footer {
     margin-top: 2rem;
   }
 
-  @include mixins.breakpoint($breakpoint-desktop) {
+  .footer__logo {
+    width: 3rem;
+    grid-area: logo;
+  }
+
+  .footer__nav {
+    grid-area: nav;
+  }
+
+  .footer__social {
+    grid-area: social;
+    padding-top: 0;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__social-item {
+    padding: 0;
+  }
+
+  .footer__nav-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0;
+    padding-top: 0;
+    text-align: left;
+  }
+
+  .footer__nav-item {
+    padding: 0;
+  }
+
+  .footer__nav-item .footer__nav-link {
+    white-space: nowrap;
+  }
+  .footer__attribution {
+    grid-area: attribution;
+    margin-top: 0;
+  }
+}
+
+@include mixins.breakpoint($breakpoint-desktop) {
+  .footer {
     padding: 2rem 8rem;
     column-gap: 6rem;
   }
 
-  .footer-logo {
-    width: 5rem;
-    @include mixins.breakpoint($breakpoint-tablet) {
-      width: 3rem;
-      grid-area: logo;
-    }
+  .footer__social {
+    justify-self: end;
   }
 
-  a {
-    text-decoration: none;
-    color: $grey-700;
-
-    &:hover,
-    &:focus,
-    &:focus-visible {
-      color: $green-500;
-    }
-  }
-
-  .footer-nav {
-    @include mixins.breakpoint($breakpoint-tablet) {
-      grid-area: nav;
-    }
-  }
-
-  .social-links {
-    padding-top: 2rem;
-
-    @include mixins.breakpoint($breakpoint-tablet) {
-      grid-area: social;
-      padding-top: 0;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    li {
-      display: inline;
-      padding: 1rem;
-      @include mixins.breakpoint($breakpoint-tablet) {
-        padding: 0;
-      }
-    }
-
-    @include mixins.breakpoint($breakpoint-desktop) {
-      justify-self: end;
-    }
-  }
-
-  .footer-nav ul,
-  .social-links {
-    list-style: none;
-    text-align: center;
-    padding: 0;
-  }
-
-  .footer-nav ul {
-    padding-top: 2rem;
-
-    @include mixins.breakpoint($breakpoint-tablet) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      padding-top: 0;
-      text-align: left;
-    }
-
-    @include mixins.breakpoint($breakpoint-desktop) {
-      grid-template-columns: repeat(3, auto);
-      justify-content: start;
-      column-gap: 4rem;
-      row-gap: 1.5rem;
-    }
-
-    li {
-      padding: 1rem;
-      @include mixins.breakpoint($breakpoint-tablet) {
-        padding: 0;
-        a {
-          white-space: nowrap;
-        }
-      }
-    }
-  }
-
-  .attribution {
-    font-size: 0.688rem;
-    text-align: center;
-    color: $grey-700;
-    margin-top: 2rem;
-
-    a {
-      color: $attribution-link-color;
-    }
-
-    @include mixins.breakpoint($breakpoint-tablet) {
-      grid-area: attribution;
-      margin-top: 0;
-    }
+  .footer__nav-list {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    column-gap: 4rem;
+    row-gap: 1.5rem;
   }
 }
 
@@ -345,28 +354,32 @@ footer {
     list-style: none;
     padding: 0;
     text-align: center;
-    li {
-      padding: 2rem;
-    }
   }
 
-  @include mixins.breakpoint($breakpoint-desktop) {
+  .features-split__item {
+    padding: 2rem;
+  }
+}
+
+@include mixins.breakpoint($breakpoint-desktop) {
+  .features-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    width: 100%;
+    column-gap: 3rem;
+  }
 
-    img {
-      justify-self: end;
-      transform: translateX(-20%);
-    }
+  .features-split img {
+    /* Align the image to the end of its column to respect the gap */
+    justify-self: end;
+    transform: translateX(-3rem);
+  }
 
-    .features-split__list {
-      max-width: 21.875rem;
-      text-align: left;
-      li {
-        padding: 1rem 0;
-      }
-    }
+  .features-split .features-split__list {
+    max-width: 24.875rem;
+    text-align: left;
+    padding-left: 0;
   }
 }
 

@@ -40,18 +40,18 @@
       <div class="features-split">
         <img src="assets/images/image-computer.png" alt="computer image" />
         <ul class="features-split__list">
-          <li>
+          <li class="features-split__item">
             <h3>Quick Search</h3>
             <p>
               Easily search your snippets by content, category, web address,
               application, and more.
             </p>
           </li>
-          <li>
+          <li class="features-split__item">
             <h3>iCloud Sync</h3>
             <p>Instantly saves and syncs snippets across all your devices.</p>
           </li>
-          <li>
+          <li class="features-split__item">
             <h3>Complete History</h3>
             <p>
               Retrieve any snippets from the first moment you started using the
@@ -73,40 +73,75 @@
         <p>We’ve got the tools to boost your productivity.</p>
       </section>
       <ul class="features-list">
-        <li>
-          <img src="assets/images/icon-blacklist.svg" alt="blacklist icon" />
-          <h3>Create blacklists</h3>
-          <p>
+        <li class="features-list__item">
+          <img
+            src="assets/images/icon-blacklist.svg"
+            alt="blacklist icon"
+            class="features-list__icon"
+          />
+          <h3 class="features-list__title">Create blacklists</h3>
+          <p class="features-list__description">
             Ensure sensitive information never makes its way to your clipboard
             by excluding certain sources.
           </p>
         </li>
-        <li>
-          <img src="assets/images/icon-text.svg" alt="text snipped icon" />
-          <h3>Plain text snippets</h3>
-          <p>
+        <li class="features-list__item">
+          <img
+            src="assets/images/icon-text.svg"
+            alt="text snipped icon"
+            class="features-list__icon"
+          />
+          <h3 class="features-list__title">Plain text snippets</h3>
+          <p class="features-list__description">
             Remove unwanted formatting from copied text for a consistent look.
           </p>
         </li>
-        <li>
-          <img src="assets/images/icon-preview.svg" alt="preview icon" />
-          <h3>Sneak preview</h3>
-          <p>
+        <li class="features-list__item">
+          <img
+            src="assets/images/icon-preview.svg"
+            alt="preview icon"
+            class="features-list__icon"
+          />
+          <h3 class="features-list__title">Sneak preview</h3>
+          <p class="features-list__description--last">
             Quick preview of all snippets on your Clipboard for easy access.
           </p>
         </li>
       </ul>
       <ul class="partners-list">
-        <li><img src="assets/images/logo-google.png" alt="Google logo" /></li>
-        <li><img src="assets/images/logo-ibm.png" alt="IBM logo" /></li>
-        <li>
-          <img src="assets/images/logo-microsoft.png" alt="Microsoft logo" />
+        <li class="partners-list__item">
+          <img
+            src="assets/images/logo-google.png"
+            alt="Google logo"
+            class="partners-list__logo"
+          />
         </li>
-        <li><img src="assets/images/logo-hp.png" alt="HP logo" /></li>
-        <li>
+        <li class="partners-list__item">
+          <img
+            src="assets/images/logo-ibm.png"
+            alt="IBM logo"
+            class="partners-list__logo"
+          />
+        </li>
+        <li class="partners-list__item">
+          <img
+            src="assets/images/logo-microsoft.png"
+            alt="Microsoft logo"
+            class="partners-list__logo"
+          />
+        </li>
+        <li class="partners-list__item">
+          <img
+            src="assets/images/logo-hp.png"
+            alt="HP logo"
+            class="partners-list__logo"
+          />
+        </li>
+        <li class="partners-list__item">
           <img
             src="assets/images/logo-vector-graphics.png"
             alt="Vector Graphics logo"
+            class="partners-list__logo"
           />
         </li>
       </ul>
@@ -122,41 +157,63 @@
         <button type="button" class="mac-download">Download for Mac</button>
       </div>
     </main>
-    <footer>
+    <footer class="footer">
       <img
         src="assets/images/logo.svg"
         alt="Clipboard logo"
-        class="footer-logo"
+        class="footer__logo"
       />
-      <nav class="footer-nav">
-        <ul>
-          <li><a href="#" class="footer-nav__link">FAQs</a></li>
-          <li><a href="#" class="footer-nav__link">Privacy Policy</a></li>
-          <li><a href="#" class="footer-nav__link">Install Guide</a></li>
-          <li><a href="#" class="footer-nav__link">Contact Us</a></li>
-          <li><a href="#" class="footer-nav__link">Press Kit</a></li>
+      <nav class="footer__nav">
+        <ul class="footer__nav-list">
+          <li class="footer__nav-item">
+            <a href="#" class="footer__nav-link">FAQs</a>
+          </li>
+          <li class="footer__nav-item">
+            <a href="#" class="footer__nav-link">Privacy Policy</a>
+          </li>
+          <li class="footer__nav-item">
+            <a href="#" class="footer__nav-link">Install Guide</a>
+          </li>
+          <li class="footer__nav-item">
+            <a href="#" class="footer__nav-link">Contact Us</a>
+          </li>
+          <li class="footer__nav-item">
+            <a href="#" class="footer__nav-link">Press Kit</a>
+          </li>
         </ul>
       </nav>
-      <ul class="social-links">
-        <li>
-          <a href="#" aria-label="Facebook"
-            ><img src="assets/images/icon-facebook.svg" alt=""
+      <ul class="footer__social">
+        <li class="footer__social-item">
+          <a href="#" aria-label="Facebook" class="footer__social-link"
+            ><img
+              src="assets/images/icon-facebook.svg"
+              alt=""
+              class="footer__social-icon"
           /></a>
         </li>
-        <li>
-          <a href="#" aria-label="Twitter"
-            ><img src="assets/images/icon-twitter.svg" alt=""
+        <li class="footer__social-item">
+          <a href="#" aria-label="Twitter" class="footer__social-link"
+            ><img
+              src="assets/images/icon-twitter.svg"
+              alt=""
+              class="footer__social-icon"
           /></a>
         </li>
-        <li>
-          <a href="#" aria-label="Instagram"
-            ><img src="assets/images/icon-instagram.svg" alt=""
+        <li class="footer__social-item">
+          <a href="#" aria-label="Instagram" class="footer__social-link"
+            ><img
+              src="assets/images/icon-instagram.svg"
+              alt=""
+              class="footer__social-icon"
           /></a>
         </li>
       </ul>
-      <p class="attribution">
+      <p class="footer__attribution">
         Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        <a
+          href="https://www.frontendmentor.io?ref=challenge"
+          target="_blank"
+          class="attribution__link"
           >Frontend Mentor</a
         >. Coded by <a href="#">Liza Fernandez</a>.
       </p>

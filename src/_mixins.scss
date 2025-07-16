@@ -1,4 +1,9 @@
-// Mixin //
+//========================================================================
+// Mixins
+//========================================================================
+
+// Displays content as Flex, centering it both horizontally and
+// vertically. Also allows user to specify flex-direction.
 @mixin flex-center($direction: row) {
   display: flex;
   flex-direction: $direction;
@@ -6,6 +11,8 @@
   align-items: center;
 }
 
+// Mixin alternative for media queries. Uses breakpoint variables
+// from __variables.scss
 @mixin breakpoint($min, $max: null) {
   @if $max {
     @media (min-width: $min) and (max-width: ($max - 1px)) {
