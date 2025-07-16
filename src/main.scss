@@ -198,19 +198,19 @@ header {
   gap: 4rem;
   margin: 5rem 0;
 
-  img {
-    width: 8rem;
-  }
-
   li {
     padding: 2rem;
   }
 }
 
+.partners-list__logo {
+  width: 8rem;
+}
+
 @include mixins.breakpoint($breakpoint-tablet) {
   .partners-list {
     @include mixins.flex-center(row);
-    gap: 6rem;
+    gap: 3.5rem;
     flex-wrap: wrap;
   }
 }
@@ -227,26 +227,7 @@ header {
   margin-top: 10rem;
 
   .footer__logo {
-    width: 5rem;
-  }
-
-  &__attribution {
-    font-size: 0.688rem;
-    text-align: center;
-    color: $grey-700;
-    margin-top: 2rem;
-    .attribution__link {
-      color: $attribution-link-color;
-    }
-  }
-
-  .footer__nav-link {
-    text-decoration: none;
-    color: $grey-700;
-    &:hover,
-    &:focus-visible {
-      color: $green-500;
-    }
+    width: 3rem;
   }
 
   &__social {
@@ -261,13 +242,32 @@ header {
     padding: 1rem;
   }
 
-  &__nav-list {
-    list-style: none;
+  &__attribution {
+    font-size: 0.688rem;
     text-align: center;
-    padding: 0;
-    @include mixins.flex-center($direction: column);
-    gap: 1.25rem;
-    margin-top: 2.5rem;
+    color: $grey-700;
+    margin-top: 2rem;
+    .attribution__link {
+      color: $attribution-link-color;
+    }
+  }
+}
+
+.footer__nav-list {
+  list-style: none; /* Explicitly remove list styles */
+  text-align: center;
+  padding: 0;
+  @include mixins.flex-center($direction: column);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.footer__nav-link {
+  text-decoration: none;
+  color: $grey-700;
+  &:hover,
+  &:focus-visible {
+    color: $green-500;
   }
 }
 
@@ -283,11 +283,6 @@ header {
     row-gap: 2rem;
     padding: 2rem 4rem;
     margin-top: 2rem;
-  }
-
-  .footer__logo {
-    width: 3rem;
-    grid-area: logo;
   }
 
   .footer__nav {
@@ -330,7 +325,7 @@ header {
 @include mixins.breakpoint($breakpoint-desktop) {
   .footer {
     padding: 2rem 8rem;
-    column-gap: 6rem;
+    column-gap: 8rem;
   }
 
   .footer__social {
@@ -338,10 +333,11 @@ header {
   }
 
   .footer__nav-list {
+    /* Use a standard 3-column grid and let items wrap naturally */
     grid-template-columns: repeat(3, auto);
     justify-content: start;
-    column-gap: 4rem;
-    row-gap: 1.5rem;
+    gap: 1.5rem 5rem; /* row-gap | column-gap */
+    width: max-content; /* CRITICAL: Forces the grid to be only as wide as its content */
   }
 }
 
@@ -355,38 +351,37 @@ header {
     padding: 0;
     text-align: center;
   }
-
   .features-split__item {
     padding: 2rem;
   }
-}
-
-@include mixins.breakpoint($breakpoint-desktop) {
-  .features-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    width: 100%;
-    column-gap: 3rem;
-  }
-
-  .features-split img {
-    /* Align the image to the end of its column to respect the gap */
-    justify-self: end;
-    transform: translateX(-3rem);
-  }
-
-  .features-split .features-split__list {
-    max-width: 24.875rem;
-    text-align: left;
-    padding-left: 0;
-  }
-}
-
-.clipboard-platforms {
-  margin-bottom: 4rem;
 
   @include mixins.breakpoint($breakpoint-desktop) {
-    max-width: 40rem;
+    .features-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      width: 100%;
+      column-gap: 3rem;
+    }
+
+    .features-split img {
+      /* Align the image to the end of its column to respect the gap */
+      justify-self: end;
+      transform: translateX(-3rem);
+    }
+
+    .features-split .features-split__list {
+      max-width: 24.875rem;
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  .clipboard-platforms {
+    margin-bottom: 4rem;
+
+    @include mixins.breakpoint($breakpoint-desktop) {
+      max-width: 40rem;
+    }
   }
 }

@@ -226,11 +226,12 @@ header::before {
   gap: 4rem;
   margin: 5rem 0;
 }
-.partners-list img {
-  width: 8rem;
-}
 .partners-list li {
   padding: 2rem;
+}
+
+.partners-list__logo {
+  width: 8rem;
 }
 
 @media (min-width: 768px) {
@@ -239,7 +240,7 @@ header::before {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 6rem;
+    gap: 3.5rem;
     flex-wrap: wrap;
   }
 }
@@ -254,23 +255,7 @@ header::before {
   margin-top: 10rem;
 }
 .footer .footer__logo {
-  width: 5rem;
-}
-.footer__attribution {
-  font-size: 0.688rem;
-  text-align: center;
-  color: hsl(210, 10%, 33%);
-  margin-top: 2rem;
-}
-.footer__attribution .attribution__link {
-  color: hsl(228, 45%, 44%);
-}
-.footer .footer__nav-link {
-  text-decoration: none;
-  color: hsl(210, 10%, 33%);
-}
-.footer .footer__nav-link:hover, .footer .footer__nav-link:focus-visible {
-  color: hsl(171, 66%, 44%);
+  width: 3rem;
 }
 .footer__social {
   padding: 0;
@@ -282,8 +267,18 @@ header::before {
   display: inline;
   padding: 1rem;
 }
+.footer__attribution {
+  font-size: 0.688rem;
+  text-align: center;
+  color: hsl(210, 10%, 33%);
+  margin-top: 2rem;
+}
+.footer__attribution .attribution__link {
+  color: hsl(228, 45%, 44%);
+}
+
 .footer__nav-list {
-  list-style: none;
+  list-style: none; /* Explicitly remove list styles */
   text-align: center;
   padding: 0;
   display: flex;
@@ -292,6 +287,14 @@ header::before {
   align-items: center;
   gap: 1.25rem;
   margin-top: 2.5rem;
+}
+
+.footer__nav-link {
+  text-decoration: none;
+  color: hsl(210, 10%, 33%);
+}
+.footer__nav-link:hover, .footer__nav-link:focus-visible {
+  color: hsl(171, 66%, 44%);
 }
 
 @media (min-width: 768px) {
@@ -304,10 +307,6 @@ header::before {
     row-gap: 2rem;
     padding: 2rem 4rem;
     margin-top: 2rem;
-  }
-  .footer__logo {
-    width: 3rem;
-    grid-area: logo;
   }
   .footer__nav {
     grid-area: nav;
@@ -343,16 +342,17 @@ header::before {
 @media (min-width: 1440px) {
   .footer {
     padding: 2rem 8rem;
-    column-gap: 6rem;
+    column-gap: 8rem;
   }
   .footer__social {
     justify-self: end;
   }
   .footer__nav-list {
+    /* Use a standard 3-column grid and let items wrap naturally */
     grid-template-columns: repeat(3, auto);
     justify-content: start;
-    column-gap: 4rem;
-    row-gap: 1.5rem;
+    gap: 1.5rem 5rem; /* row-gap | column-gap */
+    width: max-content; /* CRITICAL: Forces the grid to be only as wide as its content */
   }
 }
 .features-split img {
@@ -366,31 +366,30 @@ header::before {
 .features-split .features-split__item {
   padding: 2rem;
 }
-
 @media (min-width: 1440px) {
-  .features-split {
+  .features-split .features-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     width: 100%;
     column-gap: 3rem;
   }
-  .features-split img {
+  .features-split .features-split img {
     /* Align the image to the end of its column to respect the gap */
     justify-self: end;
     transform: translateX(-3rem);
   }
-  .features-split .features-split__list {
+  .features-split .features-split .features-split__list {
     max-width: 24.875rem;
     text-align: left;
     padding-left: 0;
   }
 }
-.clipboard-platforms {
+.features-split .clipboard-platforms {
   margin-bottom: 4rem;
 }
 @media (min-width: 1440px) {
-  .clipboard-platforms {
+  .features-split .clipboard-platforms {
     max-width: 40rem;
   }
 }/*# sourceMappingURL=main.css.map */
