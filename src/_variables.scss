@@ -6,14 +6,46 @@
 $green-500: hsl(171, 66%, 44%);
 $blue-100: hsl(233, 100%, 69%);
 $grey-100: hsl(220, 16%, 96%);
-$grey-700: hsl(210, 10%, 33%);
 $grey-500: hsl(201, 11%, 66%);
+$grey-700: hsl(210, 10%, 33%);
 $attribution-link-color: hsl(228, 45%, 44%);
 
 // Typography //
 $font-stack: "Bai Jamjuree", sans-serif;
+$line-height-base: 1.75;
+
+$fs-base: 1.125rem; // ~18px
+$fs-h1: 2.375rem;
+$fs-h2-desktop: 2.25rem;
+$fs-h2-mobile: 1.875rem;
+$fs-h3: 1.5rem;
+$fs-sm: 0.688rem;
 
 // Breakpoints
 $breakpoint-mobile: 375px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1440px;
+
+// Sizing & Spacing
+$space-xxs: 0.5rem;
+$space-xs: 0.75rem;
+$space-sm: 1rem;
+$space-2sm: 1.25rem;
+$space-md: 1.5rem;
+$space-lg: 2rem;
+$space-xl: 2.5rem;
+$space-2xl: 3rem;
+$space-3xl: 4rem;
+$space-4xl: 5rem;
+$space-5xl: 7rem;
+$space-6xl: 8rem;
+$space-7xl: 9rem;
+$space-8xl: 10rem;
+$space-9xl: 12rem;
+
+// Layout
+$container-width-sm: 20rem;
+$container-width-md: 24.875rem;
+$container-width-lg: 38rem;
+$container-width-xl: 40rem;
+$header-mask-stop: 85%;

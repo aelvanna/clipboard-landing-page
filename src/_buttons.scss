@@ -8,11 +8,11 @@
 button {
   font-family: $font-stack;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: $space-sm;
   letter-spacing: 0.1rem;
-  padding: 1rem 2rem;
+  padding: $space-sm $space-lg;
   border: none;
-  border-radius: 2rem;
+  border-radius: $space-lg;
   cursor: pointer;
   transition: background-color 0.15s ease-out;
 

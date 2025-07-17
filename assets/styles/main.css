@@ -52,13 +52,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 h1 {
   font-size: 2.375rem;
   padding-bottom: 1.5rem;
-  color: hsl(210, 10%, 33%);
 }
 
 h2 {
@@ -73,13 +72,19 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
-  color: hsl(210, 10%, 33%);
   margin-bottom: 0.75rem;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  color: hsl(210, 10%, 33%);
 }
 
 p {
   color: hsl(201, 11%, 66%);
-  line-height: 150%;
+  line-height: 1.75;
 }
 
 header {
@@ -127,7 +132,9 @@ header::before {
   align-items: center;
   gap: 1.5rem;
   width: 100%;
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .download-buttons button {
   width: 100%;
@@ -146,6 +153,10 @@ header::before {
 .snippets-section {
   margin-bottom: 5rem;
 }
+.snippets-section p {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 @media (min-width: 768px) {
   .snippets-section {
     max-width: 40rem;
@@ -158,11 +169,11 @@ header::before {
 }
 
 .clipboard-access-section {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+  margin-top: 10rem;
+  margin-bottom: 2.5rem;
 }
 .clipboard-access-section p {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 .clipboard-access-section img {
   max-width: 100%;
@@ -182,7 +193,7 @@ header::before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 4rem;
   text-align: center;
   margin: 5rem 0;
 }
@@ -190,10 +201,20 @@ header::before {
   height: 2.5rem;
   margin-bottom: 2rem;
 }
-.features-list li {
-  padding: 2rem;
+.features-list .features-list__item {
+  max-width: 20rem;
 }
-
+.features-list .features-list__item .features-list__item--last {
+  max-width: 28rem;
+}
+.features-list .features-list__description--last br {
+  display: none;
+}
+@media (min-width: 1440px) {
+  .features-list .features-list__description--last br {
+    display: initial;
+  }
+}
 @media (min-width: 768px) {
   .features-list {
     display: flex;
@@ -202,20 +223,23 @@ header::before {
     align-items: center;
     gap: 2rem;
   }
-  .features-list__item {
-    padding: 1rem 1rem 1rem 0;
-    max-width: 22rem;
-  }
 }
 @media (min-width: 1440px) {
-  .features-list__item {
-    max-width: 24rem;
+  .features-list {
+    width: 100%;
+    padding-inline: 1.5rem;
   }
-  .features-list__description--last {
-    max-width: 20rem;
-    margin-inline: auto;
+  .features-list .features-list__item:first-of-type {
+    max-width: 23rem;
+  }
+  .features-list .features-list__item:nth-of-type(2) {
+    max-width: 22rem;
+  }
+  .features-list .features-list__item:last-of-type {
+    max-width: 28rem;
   }
 }
+
 .partners-list {
   list-style: none;
   padding: 0;
@@ -223,8 +247,8 @@ header::before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
-  margin: 5rem 0;
+  gap: 0.75rem;
+  margin: 3rem 0;
 }
 .partners-list li {
   padding: 2rem;
@@ -252,14 +276,13 @@ header::before {
 .footer {
   background-color: hsl(220, 16%, 96%);
   padding: 3rem 2rem;
-  margin-top: 10rem;
 }
 .footer .footer__logo {
-  width: 3rem;
+  width: 4rem;
 }
 .footer__social {
   padding: 0;
-  padding-top: 2rem;
+  padding-top: 3rem;
   list-style: none;
   text-align: center;
 }
@@ -278,7 +301,7 @@ header::before {
 }
 
 .footer__nav-list {
-  list-style: none; /* Explicitly remove list styles */
+  list-style: none;
   text-align: center;
   padding: 0;
   display: flex;
@@ -346,17 +369,18 @@ header::before {
   }
   .footer__social {
     justify-self: end;
+    align-items: center;
   }
   .footer__nav-list {
-    /* Use a standard 3-column grid and let items wrap naturally */
     grid-template-columns: repeat(3, auto);
     justify-content: start;
-    gap: 1.5rem 5rem; /* row-gap | column-gap */
-    width: max-content; /* CRITICAL: Forces the grid to be only as wide as its content */
+    gap: 1.5rem 5rem;
+    width: max-content;
   }
 }
 .features-split img {
   max-width: 100%;
+  margin-bottom: 2rem;
 }
 .features-split .features-split__list {
   list-style: none;
@@ -364,32 +388,41 @@ header::before {
   text-align: center;
 }
 .features-split .features-split__item {
-  padding: 2rem;
+  padding: 1rem;
 }
 @media (min-width: 1440px) {
-  .features-split .features-split {
+  .features-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     width: 100%;
-    column-gap: 3rem;
+    column-gap: 0.75rem;
   }
-  .features-split .features-split img {
-    /* Align the image to the end of its column to respect the gap */
+  .features-split img {
     justify-self: end;
-    transform: translateX(-3rem);
+    transform: translateX(-4rem);
+    max-width: none;
+    margin-bottom: 0;
   }
-  .features-split .features-split .features-split__list {
+  .features-split .features-split__list {
     max-width: 24.875rem;
     text-align: left;
     padding-left: 0;
   }
 }
-.features-split .clipboard-platforms {
-  margin-bottom: 4rem;
+
+.clipboard-platforms {
+  margin-block: 8rem;
+}
+.clipboard-platforms p {
+  margin-bottom: 3rem;
 }
 @media (min-width: 1440px) {
-  .features-split .clipboard-platforms {
+  .clipboard-platforms {
     max-width: 40rem;
+  }
+  .clipboard-platforms p {
+    max-width: 38rem;
+    margin-inline: auto;
   }
 }/*# sourceMappingURL=main.css.map */

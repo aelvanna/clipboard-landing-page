@@ -11,10 +11,10 @@
 html {
   font-family: $font-stack;
   font-weight: 400;
-  font-size: 1.125rem;
+  font-size: $fs-base;
 
   /* Set Fluid Font-size*/
-  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  font-size: clamp($space-sm, 0.9rem + 0.5vw, $fs-base);
   overflow-x: hidden;
 }
 
@@ -30,32 +30,38 @@ body {
 
 .container {
   @include mixins.flex-center(column);
-  padding: 0 2rem;
+  padding: 0 $space-sm;
 }
 
 h1 {
-  font-size: 2.375rem;
-  padding-bottom: 1.5rem;
-  color: $grey-700;
+  font-size: $fs-h1;
+  padding-bottom: $space-md;
 }
+
 h2 {
-  font-size: 1.875rem;
-  margin-bottom: 1.25rem;
+  font-size: $fs-h2-mobile;
+  margin-bottom: $space-2sm;
 
   @include mixins.breakpoint($breakpoint-tablet) {
-    font-size: 2.25rem;
+    font-size: $fs-h2-desktop;
   }
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: $fs-h3;
+  margin-bottom: $space-xs;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
   color: $grey-700;
-  margin-bottom: 0.75rem;
 }
 
 p {
   color: $grey-500;
-  line-height: 150%;
+  line-height: $line-height-base;
 }
 
 header {
@@ -81,14 +87,22 @@ header {
     background-repeat: no-repeat;
     // Add mask to bg image
     // Creates a soft fade-out effect on the bottom
-    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    mask-image: linear-gradient(
+      to bottom,
+      black $header-mask-stop,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black $header-mask-stop,
+      transparent 100%
+    );
   }
 }
 
 @include mixins.breakpoint($breakpoint-tablet) {
   header p {
-    max-width: 38rem;
+    max-width: $container-width-lg;
   }
   header::before {
     background-image: url("../images/bg-header-desktop.png");
@@ -96,14 +110,16 @@ header {
 }
 
 .logo {
-  padding-bottom: 4rem;
+  padding-bottom: $space-3xl;
 }
 
 .download-buttons {
   @include mixins.flex-center(column);
-  gap: 1.5rem;
+  gap: $space-md;
   width: 100%;
-  margin-bottom: 10rem;
+  margin-bottom: $space-2xl;
+  padding-left: $space-sm;
+  padding-right: $space-sm;
 
   button {
     width: 100%;
@@ -111,7 +127,7 @@ header {
 
   @include mixins.breakpoint($breakpoint-tablet) {
     flex-direction: row;
-    margin-bottom: 10rem;
+    margin-bottom: $space-8xl;
     width: auto;
     button {
       width: auto;
@@ -120,33 +136,38 @@ header {
 }
 
 .snippets-section {
-  margin-bottom: 5rem;
+  margin-bottom: $space-4xl;
+
+  p {
+    padding-left: $space-sm;
+    padding-right: $space-sm;
+  }
 
   @include mixins.breakpoint($breakpoint-tablet) {
-    max-width: 40rem;
+    max-width: $container-width-xl;
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
-    margin-bottom: 9rem;
+    margin-bottom: $space-7xl;
   }
 }
 
 .clipboard-access-section {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+  margin-top: $space-8xl;
+  margin-bottom: $space-xl;
 
   p {
-    margin-bottom: 5rem;
+    margin-bottom: $space-2xl;
   }
 
   img {
     max-width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: $space-2xl;
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
-    margin-top: 12rem;
-    max-width: 40rem;
+    margin-top: $space-9xl;
+    max-width: $container-width-xl;
   }
 }
 
@@ -154,40 +175,65 @@ header {
   list-style: none;
   padding: 0;
   @include mixins.flex-center(column);
-  gap: 3rem;
+  gap: $space-3xl;
   text-align: center;
-  margin: 5rem 0;
+  margin: $space-4xl 0;
 
   img {
-    height: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
-  li {
-    padding: 2rem;
-  }
-}
-
-@include mixins.breakpoint($breakpoint-tablet) {
-  .features-list {
-    @include mixins.flex-center(row);
-    gap: 2rem;
+    height: $space-xl;
+    margin-bottom: $space-lg;
   }
 
   .features-list__item {
-    padding: 1rem 1rem 1rem 0;
-    max-width: 22rem;
-  }
-}
+    max-width: 20rem;
 
-@include mixins.breakpoint($breakpoint-desktop) {
-  .features-list__item {
-    max-width: 24rem;
+    // Target last list item and change width
+    .features-list__item--last {
+      max-width: 28rem;
+    }
   }
 
   .features-list__description--last {
-    max-width: 20rem;
-    margin-inline: auto;
+    br {
+      // Mobile: Hide the forced line break from index.html
+      // Text wraps based on container width
+      display: none;
+
+      // Desktop: Restore the <br> to its default line-breaking behavior.
+      @include mixins.breakpoint($breakpoint-desktop) {
+        display: initial;
+      }
+    }
+  }
+
+  // Tablet and up
+  @include mixins.breakpoint($breakpoint-tablet) {
+    @include mixins.flex-center(row);
+    gap: $space-lg;
+  }
+
+  // Desktop and up
+  @include mixins.breakpoint($breakpoint-desktop) {
+    // Force list to be same as container's width
+    width: 100%;
+    // Add padding to both sides without affecting item widths.
+    padding-inline: $space-md;
+    .features-list__item {
+      // Target the first list item ("Create blacklists")
+      &:first-of-type {
+        max-width: 23rem;
+      }
+
+      // Target the second list item ("Plain text snippets")
+      &:nth-of-type(2) {
+        max-width: 22rem;
+      }
+
+      // Target last list item and change width
+      &:last-of-type {
+        max-width: 28rem;
+      }
+    }
   }
 }
 
@@ -195,58 +241,57 @@ header {
   list-style: none;
   padding: 0;
   @include mixins.flex-center(column);
-  gap: 4rem;
-  margin: 5rem 0;
+  gap: $space-xs;
+  margin: $space-2xl 0;
 
   li {
-    padding: 2rem;
+    padding: $space-lg;
   }
 }
 
 .partners-list__logo {
-  width: 8rem;
+  width: $space-6xl;
 }
 
 @include mixins.breakpoint($breakpoint-tablet) {
   .partners-list {
     @include mixins.flex-center(row);
-    gap: 3.5rem;
+    gap: 3.5rem; // This value is quite specific.
     flex-wrap: wrap;
   }
 }
 
 @include mixins.breakpoint($breakpoint-desktop) {
   .partners-list {
-    margin-bottom: 7rem;
+    margin-bottom: $space-5xl;
   }
 }
 
 .footer {
   background-color: $grey-100;
   padding: 3rem 2rem;
-  margin-top: 10rem;
 
   .footer__logo {
-    width: 3rem;
+    width: $space-3xl;
   }
 
   &__social {
     padding: 0;
-    padding-top: 2rem;
+    padding-top: $space-2xl;
     list-style: none;
     text-align: center;
   }
 
   &__social-item {
     display: inline;
-    padding: 1rem;
+    padding: $space-sm;
   }
 
   &__attribution {
-    font-size: 0.688rem;
+    font-size: $fs-sm;
     text-align: center;
     color: $grey-700;
-    margin-top: 2rem;
+    margin-top: $space-lg;
     .attribution__link {
       color: $attribution-link-color;
     }
@@ -254,12 +299,12 @@ header {
 }
 
 .footer__nav-list {
-  list-style: none; /* Explicitly remove list styles */
+  list-style: none;
   text-align: center;
   padding: 0;
   @include mixins.flex-center($direction: column);
-  gap: 1.25rem;
-  margin-top: 2.5rem;
+  gap: $space-2sm;
+  margin-top: $space-xl;
 }
 
 .footer__nav-link {
@@ -279,10 +324,10 @@ header {
       "logo nav social"
       "attribution attribution attribution";
     align-items: center;
-    column-gap: 2.5rem;
-    row-gap: 2rem;
-    padding: 2rem 4rem;
-    margin-top: 2rem;
+    column-gap: $space-xl;
+    row-gap: $space-lg;
+    padding: $space-lg $space-3xl;
+    margin-top: $space-lg;
   }
 
   .footer__nav {
@@ -293,7 +338,7 @@ header {
     grid-area: social;
     padding-top: 0;
     display: flex;
-    gap: 1.5rem;
+    gap: $space-md;
   }
 
   .footer__social-item {
@@ -303,7 +348,7 @@ header {
   .footer__nav-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: $space-sm;
     margin-top: 0;
     padding-top: 0;
     text-align: left;
@@ -324,26 +369,29 @@ header {
 
 @include mixins.breakpoint($breakpoint-desktop) {
   .footer {
-    padding: 2rem 8rem;
-    column-gap: 8rem;
+    padding: $space-lg $space-6xl;
+    column-gap: $space-6xl;
   }
 
   .footer__social {
     justify-self: end;
+    align-items: center;
   }
 
   .footer__nav-list {
-    /* Use a standard 3-column grid and let items wrap naturally */
     grid-template-columns: repeat(3, auto);
     justify-content: start;
-    gap: 1.5rem 5rem; /* row-gap | column-gap */
-    width: max-content; /* CRITICAL: Forces the grid to be only as wide as its content */
+    gap: $space-md $space-4xl;
+    width: max-content;
   }
 }
 
 .features-split {
+  // Base mobile-first styles
+
   img {
     max-width: 100%;
+    margin-bottom: $space-lg;
   }
 
   .features-split__list {
@@ -352,36 +400,46 @@ header {
     text-align: center;
   }
   .features-split__item {
-    padding: 2rem;
+    padding: $space-sm;
   }
 
+  // Desktop grid layout
   @include mixins.breakpoint($breakpoint-desktop) {
-    .features-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      width: 100%;
-      column-gap: 3rem;
-    }
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    column-gap: $space-xs;
 
-    .features-split img {
-      /* Align the image to the end of its column to respect the gap */
+    img {
       justify-self: end;
-      transform: translateX(-3rem);
+      transform: translateX(-$space-3xl);
+      // Removes responsive max-width, alllowing image to
+      // render at file image dimensions
+      max-width: none;
+      margin-bottom: 0; // Reset mobile margin
     }
 
-    .features-split .features-split__list {
-      max-width: 24.875rem;
+    .features-split__list {
+      max-width: $container-width-md;
       text-align: left;
       padding-left: 0;
     }
   }
+}
 
-  .clipboard-platforms {
-    margin-bottom: 4rem;
+.clipboard-platforms {
+  margin-block: $space-6xl;
 
-    @include mixins.breakpoint($breakpoint-desktop) {
-      max-width: 40rem;
+  p {
+    margin-bottom: $space-2xl;
+  }
+
+  @include mixins.breakpoint($breakpoint-desktop) {
+    max-width: $container-width-xl;
+    p {
+      max-width: $container-width-lg;
+      margin-inline: auto;
     }
   }
 }
