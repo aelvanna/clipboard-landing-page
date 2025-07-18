@@ -14,8 +14,10 @@ $attribution-link-color: hsl(228, 45%, 44%);
 $font-stack: "Bai Jamjuree", sans-serif;
 $line-height-base: 1.75;
 
+// Font Sizes //
 $fs-base: 1.125rem; // ~18px
-$fs-h1: 2.375rem;
+$fs-h1-desktop: 2.375rem;
+$fs-h1-mobile: 2rem;
 $fs-h2-desktop: 2.25rem;
 $fs-h2-mobile: 1.875rem;
 $fs-h3: 1.5rem;
@@ -25,6 +27,7 @@ $fs-sm: 0.688rem;
 $breakpoint-mobile: 375px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1440px;
+$breakpoint-desktop-4k: 2560px;
 
 // Sizing & Spacing
 $space-xxs: 0.5rem;
@@ -43,9 +46,16 @@ $space-7xl: 9rem;
 $space-8xl: 10rem;
 $space-9xl: 12rem;
 
+$gap-space: 0.3rem; // Gap equivalent to a " "
+$gap-3-5: 3.5rem;
+$header-p-space: 0.9rem;
+
 // Layout
+$header-width: 34rem;
 $container-width-sm: 20rem;
+$container-width-2sm: 23rem;
 $container-width-md: 24.875rem;
+$container-width-2md: 28rem;
 $container-width-lg: 38rem;
 $container-width-xl: 40rem;
 $header-mask-stop: 85%;

@@ -7,25 +7,27 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
-/* Styling */
+// Styling //
+
 html {
   font-family: $font-stack;
   font-weight: 400;
   font-size: $fs-base;
 
-  /* Set Fluid Font-size*/
+  // Set Fluid Font-size //
   font-size: clamp($space-sm, 0.9rem + 0.5vw, $fs-base);
   overflow-x: hidden;
+
+  // Reset Margins and Padding //
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   text-align: center;
-}
-
-* {
-  box-sizing: border-box;
+  // Resets Margin to remove white space at top of page
   margin: 0;
-  padding: 0;
 }
 
 .container {
@@ -33,9 +35,14 @@ body {
   padding: 0 $space-sm;
 }
 
+// Base Text Styles
 h1 {
-  font-size: $fs-h1;
-  padding-bottom: $space-md;
+  font-size: $fs-h1-mobile;
+  margin: 0;
+
+  @include mixins.breakpoint($breakpoint-tablet) {
+    font-size: $fs-h1-desktop;
+  }
 }
 
 h2 {
@@ -64,6 +71,8 @@ p {
   line-height: $line-height-base;
 }
 
+// Page Header Styling //
+// Base Layout //
 header {
   padding-top: 8.125rem;
   padding-bottom: 3rem;
@@ -98,28 +107,40 @@ header {
       transparent 100%
     );
   }
+
+  .header__logo {
+    margin-bottom: $space-2xl;
+  }
+
+  p {
+    max-width: $container-width-sm;
+    margin-inline: $header-p-space;
+  }
 }
 
+// Tablet Layout //
 @include mixins.breakpoint($breakpoint-tablet) {
   header p {
-    max-width: $container-width-lg;
+    max-width: $header-width;
+
+    // On larger screens, the text will wrap naturally due to the max-width,
+    // so the manual line break is no longer needed.
+    br {
+      display: none;
+    }
   }
   header::before {
     background-image: url("../images/bg-header-desktop.png");
   }
 }
 
-.logo {
-  padding-bottom: $space-3xl;
-}
+// Base Layout //
 
 .download-buttons {
   @include mixins.flex-center(column);
   gap: $space-md;
   width: 100%;
-  margin-bottom: $space-2xl;
-  padding-left: $space-sm;
-  padding-right: $space-sm;
+  margin-bottom: $space-6xl;
 
   button {
     width: 100%;
@@ -152,12 +173,52 @@ header {
   }
 }
 
+// Base Layout
+.features-split {
+  img {
+    max-width: 100%;
+  }
+
+  .features-split__list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  .features-split__item {
+    padding: $space-sm;
+  }
+
+  // Desktop: Grid layout
+  @include mixins.breakpoint($breakpoint-desktop) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    column-gap: $space-xs;
+
+    img {
+      justify-self: end;
+      transform: translateX(-$space-3xl);
+      // Removes responsive max-width, alllowing image to
+      // render at file image dimensions
+      max-width: none;
+      margin-bottom: 0; // Reset mobile margin
+    }
+
+    .features-split__list {
+      max-width: $container-width-2sm;
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+}
+
 .clipboard-access-section {
   margin-top: $space-8xl;
   margin-bottom: $space-xl;
 
   p {
-    margin-bottom: $space-2xl;
+    margin-bottom: $space-3xl;
   }
 
   img {
@@ -166,59 +227,74 @@ header {
   }
 
   @include mixins.breakpoint($breakpoint-desktop) {
-    margin-top: $space-9xl;
-    max-width: $container-width-xl;
+    margin-top: $space-4xl;
+
+    // Constrain the text elements directly, allowing the section to be
+    // full-width so the wider image can center properly.
+    h2,
+    p {
+      max-width: $container-width-xl;
+      margin-inline: auto;
+    }
+
+    p {
+      margin-bottom: $space-5xl;
+    }
+
+    img {
+      // Allow the image to be same as orignal image dimensions
+      max-width: none;
+    }
   }
 }
 
-.features-list {
-  list-style: none;
-  padding: 0;
-  @include mixins.flex-center(column);
-  gap: $space-3xl;
-  text-align: center;
-  margin: $space-4xl 0;
-
-  img {
-    height: $space-xl;
-    margin-bottom: $space-lg;
+.features-section {
+  &__list {
+    list-style: none;
+    padding: 0;
+    @include mixins.flex-center(column);
+    gap: $space-3xl;
+    text-align: center;
+    margin: $space-4xl 0;
   }
 
-  .features-list__item {
-    max-width: 20rem;
+  &__list-item {
+    max-width: $container-width-sm;
 
-    // Target last list item and change width
-    .features-list__item--last {
-      max-width: 28rem;
+    img {
+      height: $space-xl;
+      margin-bottom: $space-lg;
+    }
+
+    &--last {
+      max-width: $container-width-2md;
     }
   }
 
-  .features-list__description--last {
+  &__description--last {
     br {
-      // Mobile: Hide the forced line break from index.html
-      // Text wraps based on container width
       display: none;
 
-      // Desktop: Restore the <br> to its default line-breaking behavior.
       @include mixins.breakpoint($breakpoint-desktop) {
         display: initial;
       }
     }
   }
 
-  // Tablet and up
   @include mixins.breakpoint($breakpoint-tablet) {
-    @include mixins.flex-center(row);
-    gap: $space-lg;
+    &__list {
+      @include mixins.flex-center(row);
+      gap: $space-lg;
+    }
   }
 
-  // Desktop and up
   @include mixins.breakpoint($breakpoint-desktop) {
-    // Force list to be same as container's width
-    width: 100%;
-    // Add padding to both sides without affecting item widths.
-    padding-inline: $space-md;
-    .features-list__item {
+    // On desktop and wider screens, we only need to adjust the max-width
+    // of the individual feature items. The flexbox layout is handled
+    // at the tablet breakpoint and inherited here. The previous grid
+    // implementation was redundant as all children spanned the full width.
+
+    &__list-item {
       // Target the first list item ("Create blacklists")
       &:first-of-type {
         max-width: 23rem;
@@ -231,12 +307,13 @@ header {
 
       // Target last list item and change width
       &:last-of-type {
-        max-width: 28rem;
+        max-width: $container-width-2md;
       }
     }
   }
 }
 
+// Base Layout //
 .partners-list {
   list-style: none;
   padding: 0;
@@ -253,10 +330,12 @@ header {
   width: $space-6xl;
 }
 
+// Tablet & Up Layout
+
 @include mixins.breakpoint($breakpoint-tablet) {
   .partners-list {
     @include mixins.flex-center(row);
-    gap: 3.5rem; // This value is quite specific.
+    gap: $gap-3-5;
     flex-wrap: wrap;
   }
 }
@@ -267,9 +346,33 @@ header {
   }
 }
 
+// Base Layout
+
+.clipboard-platforms {
+  h2 {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: $space-2xl;
+    padding: $space-sm;
+  }
+
+  @include mixins.breakpoint($breakpoint-desktop) {
+    max-width: $container-width-xl;
+    p {
+      max-width: $container-width-lg;
+      margin-inline: auto;
+      margin-bottom: $space-sm;
+    }
+  }
+}
+
+// Footer Base Layout //
 .footer {
   background-color: $grey-100;
-  padding: 3rem 2rem;
+  padding: $space-2xl $space-lg;
 
   .footer__logo {
     width: $space-3xl;
@@ -316,18 +419,20 @@ header {
   }
 }
 
+// Footer Tablet -> Desktop Layout //
+
 @include mixins.breakpoint($breakpoint-tablet) {
   .footer {
     display: grid;
     grid-template-columns: auto auto 1fr;
     grid-template-areas:
-      "logo nav social"
+      "footer__logo nav social"
       "attribution attribution attribution";
     align-items: center;
     column-gap: $space-xl;
     row-gap: $space-lg;
     padding: $space-lg $space-3xl;
-    margin-top: $space-lg;
+    margin-top: 0;
   }
 
   .footer__nav {
@@ -386,60 +491,26 @@ header {
   }
 }
 
-.features-split {
-  // Base mobile-first styles
+/* 4k Layout */
+@include mixins.breakpoint($breakpoint-desktop-4k) {
+  .footer {
+    // Use Flexbox for alignment and allow wrapping
+    @include mixins.flex-center(row);
+    flex-wrap: wrap;
+  }
 
-  img {
-    max-width: 100%;
+  .footer__nav {
+    // Sets nav to grow & fill the space between the logo and social icons
+    flex-grow: 0.2;
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer__attribution {
+    // Attribution takes full width, forcing it to move to its own line
+    @include mixins.flex-center(row);
+    flex-basis: 100%;
+    gap: $gap-space;
     margin-bottom: $space-lg;
-  }
-
-  .features-split__list {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-  }
-  .features-split__item {
-    padding: $space-sm;
-  }
-
-  // Desktop grid layout
-  @include mixins.breakpoint($breakpoint-desktop) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    width: 100%;
-    column-gap: $space-xs;
-
-    img {
-      justify-self: end;
-      transform: translateX(-$space-3xl);
-      // Removes responsive max-width, alllowing image to
-      // render at file image dimensions
-      max-width: none;
-      margin-bottom: 0; // Reset mobile margin
-    }
-
-    .features-split__list {
-      max-width: $container-width-md;
-      text-align: left;
-      padding-left: 0;
-    }
-  }
-}
-
-.clipboard-platforms {
-  margin-block: $space-6xl;
-
-  p {
-    margin-bottom: $space-2xl;
-  }
-
-  @include mixins.breakpoint($breakpoint-desktop) {
-    max-width: $container-width-xl;
-    p {
-      max-width: $container-width-lg;
-      margin-inline: auto;
-    }
   }
 }
