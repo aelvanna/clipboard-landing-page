@@ -78,6 +78,7 @@ header {
   padding-bottom: 3rem;
   @include mixins.flex-center(column);
   position: relative;
+  gap: $space-xl;
 
   // Positions header bg image and ensures that it is
   // not hidden below white bg
@@ -108,13 +109,10 @@ header {
     );
   }
 
-  &__logo {
-    margin-bottom: $space-2xl;
-  }
-
   p {
     max-width: $container-width-sm;
     margin-inline: $header-p-space;
+    margin-block: 0; // Reset vertical margin so `gap` controls all spacing.
   }
 
   // Tablet Layout and up
