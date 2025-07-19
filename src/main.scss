@@ -108,7 +108,7 @@ header {
     );
   }
 
-  .header__logo {
+  &__logo {
     margin-bottom: $space-2xl;
   }
 
@@ -116,21 +116,20 @@ header {
     max-width: $container-width-sm;
     margin-inline: $header-p-space;
   }
-}
 
-// Tablet Layout //
-@include mixins.breakpoint($breakpoint-tablet) {
-  header p {
-    max-width: $header-width;
+  // Tablet Layout and up
+  @include mixins.breakpoint($breakpoint-tablet) {
+    p {
+      max-width: $header-width;
 
-    // On larger screens, the text will wrap naturally due to the max-width,
-    // so the manual line break is no longer needed.
-    br {
-      display: none;
+      // On larger screens, the text will wrap naturally
+      br {
+        display: none;
+      }
     }
-  }
-  header::before {
-    background-image: url("../images/bg-header-desktop.png");
+    &::before {
+      background-image: url("../images/bg-header-desktop.png");
+    }
   }
 }
 
@@ -178,7 +177,7 @@ header {
     max-width: 100%;
   }
 
-  .features-split__list {
+  &__list {
     list-style: none;
     padding: 0;
     text-align: center;
@@ -188,7 +187,7 @@ header {
       margin: 0 auto;
     }
   }
-  .features-split__item {
+  &__item {
     padding: $space-sm;
   }
 
@@ -213,7 +212,7 @@ header {
       margin-bottom: 0; // Reset Base layout margin
     }
 
-    .features-split__list {
+    &__list {
       max-width: $container-width-2sm;
       text-align: left;
       margin-inline: 0;
@@ -287,18 +286,7 @@ header {
     }
   }
 
-  @include mixins.breakpoint($breakpoint-tablet) {
-    &__list {
-      @include mixins.flex-center(column);
-    }
-  }
-
   @include mixins.breakpoint($breakpoint-desktop) {
-    // On desktop and wider screens, we only need to adjust the max-width
-    // of the individual feature items. The flexbox layout is handled
-    // at the tablet breakpoint and inherited here. The previous grid
-    // implementation was redundant as all children spanned the full width.
-
     &__list-item {
       // Target the first list item ("Create blacklists")
       &:first-of-type {
@@ -326,26 +314,22 @@ header {
   gap: $space-xs;
   margin: $space-2xl 0;
 
-  li {
+  &__item {
     padding: $space-lg;
   }
-}
 
-.partners-list__logo {
-  width: $space-6xl;
-}
+  &__logo {
+    width: $space-6xl;
+  }
 
-// Tablet --> Desktop Layout
-@include mixins.breakpoint($breakpoint-tablet) {
-  .partners-list {
+  // Tablet --> Desktop Layout
+  @include mixins.breakpoint($breakpoint-tablet) {
     @include mixins.flex-center(row);
     gap: $gap-3-5;
     flex-wrap: wrap;
   }
-}
 
-@include mixins.breakpoint($breakpoint-desktop) {
-  .partners-list {
+  @include mixins.breakpoint($breakpoint-desktop) {
     margin-bottom: $space-5xl;
   }
 }
@@ -380,18 +364,18 @@ header {
   @include mixins.flex-center(column);
   gap: $space-xl;
 
-  .footer__logo {
+  &__logo {
     width: $space-3xl;
   }
 
   &__social {
     padding: 0;
     list-style: none;
-  }
 
-  &__social-item {
-    display: inline;
-    padding: $space-sm;
+    &-item {
+      display: inline;
+      padding: $space-sm;
+    }
   }
 
   &__attribution {
@@ -399,34 +383,31 @@ header {
     text-align: center;
     color: $grey-700;
     margin-top: 0;
-    .attribution__link {
+    a {
       color: $attribution-link-color;
     }
   }
-}
 
-.footer__nav-list {
-  list-style: none;
-  text-align: center;
-  padding: 0;
-  @include mixins.flex-center($direction: column);
-  gap: $space-2sm;
-  margin-top: 0;
-}
-
-.footer__nav-link {
-  text-decoration: none;
-  color: $grey-700;
-  &:hover,
-  &:focus-visible {
-    color: $green-500;
+  &__nav-list {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    @include mixins.flex-center($direction: column);
+    gap: $space-2sm;
+    margin-top: 0;
   }
-}
 
-// Footer Tablet -> Desktop Layout //
+  &__nav-link {
+    text-decoration: none;
+    color: $grey-700;
+    &:hover,
+    &:focus-visible {
+      color: $green-500;
+    }
+  }
 
-@include mixins.breakpoint($breakpoint-tablet) {
-  .footer {
+  // Footer Tablet -> Desktop Layout //
+  @include mixins.breakpoint($breakpoint-tablet) {
     display: grid;
     grid-template-columns: auto auto 1fr;
     grid-template-areas:
@@ -435,79 +416,72 @@ header {
     align-items: center;
     column-gap: $space-xl;
     row-gap: $space-lg;
-    padding: $space-3xl $space-3xl;
+    padding: $space-3xl;
     margin-top: 0;
+
+    &__nav {
+      grid-area: nav;
+    }
+
+    &__logo {
+      grid-area: logo;
+    }
+
+    &__social {
+      grid-area: social;
+      padding-top: 0;
+      display: flex;
+      gap: $space-md;
+
+      &-item {
+        padding: 0;
+      }
+    }
+
+    &__nav-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: $space-sm;
+      margin-top: 0;
+      padding-top: 0;
+      text-align: left;
+    }
+
+    &__nav-item {
+      padding: 0;
+
+      .footer__nav-link {
+        white-space: nowrap;
+      }
+    }
+
+    &__attribution {
+      grid-area: attribution;
+      margin-top: 0;
+    }
   }
 
-  .footer__nav {
-    grid-area: nav;
-  }
-
-  .footer__logo {
-    grid-area: logo;
-  }
-
-  .footer__social {
-    grid-area: social;
-    padding-top: 0;
-    display: flex;
-    gap: $space-md;
-  }
-
-  .footer__social-item {
-    padding: 0;
-  }
-
-  .footer__nav-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: $space-sm;
-    margin-top: 0;
-    padding-top: 0;
-    text-align: left;
-  }
-
-  .footer__nav-item {
-    padding: 0;
-  }
-
-  .footer__nav-item .footer__nav-link {
-    white-space: nowrap;
-  }
-  .footer__attribution {
-    grid-area: attribution;
-    margin-top: 0;
-  }
-}
-
-@include mixins.breakpoint($breakpoint-desktop) {
-  .footer {
-    // Increases horizontal padding to move footer text to the right
+  // Footer: Desktop Layout
+  @include mixins.breakpoint($breakpoint-desktop) {
     padding-inline: $space-6xl;
-    // Adjust spacing between footer logo and nav links
     column-gap: $space-6xl;
+
+    &__social {
+      justify-self: end;
+      align-items: center;
+    }
+
+    &__nav-list {
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      gap: $space-md $space-4xl;
+      width: max-content;
+    }
   }
 
-  .footer__social {
-    justify-self: end;
-    align-items: center;
-  }
-
-  .footer__nav-list {
-    grid-template-columns: repeat(3, auto);
-    justify-content: start;
-    gap: $space-md $space-4xl;
-    width: max-content;
-  }
-}
-
-// Footer: 4K/2560px/Widescreen Layout
-
-@include mixins.breakpoint($breakpoint-desktop-4k) {
-  .footer {
-    // Increases horizontal padding to move footer text to the right
+  // Footer: 4K/2560px/Widescreen Layout
+  @include mixins.breakpoint($breakpoint-desktop-4k) {
     padding-inline: $screen4k-footer-padding;
-    // Adjust spacing between footer logo and nav links
     column-gap: $space-7xl;
   }
 }
