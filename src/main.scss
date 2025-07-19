@@ -173,7 +173,6 @@ header {
   }
 }
 
-// Base Layout
 .features-split {
   img {
     max-width: 100%;
@@ -183,6 +182,11 @@ header {
     list-style: none;
     padding: 0;
     text-align: center;
+
+    @include mixins.breakpoint($breakpoint-tablet) {
+      max-width: $container-width-md;
+      margin: 0 auto;
+    }
   }
   .features-split__item {
     padding: $space-sm;
@@ -196,23 +200,29 @@ header {
     width: 100%;
     column-gap: $space-xs;
 
+    h3 {
+      margin-top: 0;
+    }
+
     img {
       justify-self: end;
       transform: translateX(-$space-3xl);
       // Removes responsive max-width, alllowing image to
       // render at file image dimensions
       max-width: none;
-      margin-bottom: 0; // Reset mobile margin
+      margin-bottom: 0; // Reset Base layout margin
     }
 
     .features-split__list {
       max-width: $container-width-2sm;
       text-align: left;
-      padding-left: 0;
+      margin-inline: 0;
+      padding-left: $space-sm;
     }
   }
 }
 
+// Base & Desktop Layout
 .clipboard-access-section {
   margin-top: $space-8xl;
   margin-bottom: $space-xl;
@@ -265,10 +275,6 @@ header {
       height: $space-xl;
       margin-bottom: $space-lg;
     }
-
-    &--last {
-      max-width: $container-width-2md;
-    }
   }
 
   &__description--last {
@@ -283,8 +289,7 @@ header {
 
   @include mixins.breakpoint($breakpoint-tablet) {
     &__list {
-      @include mixins.flex-center(row);
-      gap: $space-lg;
+      @include mixins.flex-center(column);
     }
   }
 
@@ -330,8 +335,7 @@ header {
   width: $space-6xl;
 }
 
-// Tablet & Up Layout
-
+// Tablet --> Desktop Layout
 @include mixins.breakpoint($breakpoint-tablet) {
   .partners-list {
     @include mixins.flex-center(row);
@@ -369,10 +373,12 @@ header {
   }
 }
 
-// Footer Base Layout //
+// Footer: Base Layout //
 .footer {
   background-color: $grey-100;
-  padding: $space-2xl $space-lg;
+  padding: $space-3xl $space-lg;
+  @include mixins.flex-center(column);
+  gap: $space-xl;
 
   .footer__logo {
     width: $space-3xl;
@@ -380,9 +386,7 @@ header {
 
   &__social {
     padding: 0;
-    padding-top: $space-2xl;
     list-style: none;
-    text-align: center;
   }
 
   &__social-item {
@@ -394,7 +398,7 @@ header {
     font-size: $fs-sm;
     text-align: center;
     color: $grey-700;
-    margin-top: $space-lg;
+    margin-top: 0;
     .attribution__link {
       color: $attribution-link-color;
     }
@@ -407,7 +411,7 @@ header {
   padding: 0;
   @include mixins.flex-center($direction: column);
   gap: $space-2sm;
-  margin-top: $space-xl;
+  margin-top: 0;
 }
 
 .footer__nav-link {
@@ -426,17 +430,21 @@ header {
     display: grid;
     grid-template-columns: auto auto 1fr;
     grid-template-areas:
-      "footer__logo nav social"
+      "logo nav social"
       "attribution attribution attribution";
     align-items: center;
     column-gap: $space-xl;
     row-gap: $space-lg;
-    padding: $space-lg $space-3xl;
+    padding: $space-3xl $space-3xl;
     margin-top: 0;
   }
 
   .footer__nav {
     grid-area: nav;
+  }
+
+  .footer__logo {
+    grid-area: logo;
   }
 
   .footer__social {
@@ -474,7 +482,9 @@ header {
 
 @include mixins.breakpoint($breakpoint-desktop) {
   .footer {
-    padding: $space-lg $space-6xl;
+    // Increases horizontal padding to move footer text to the right
+    padding-inline: $space-6xl;
+    // Adjust spacing between footer logo and nav links
     column-gap: $space-6xl;
   }
 
@@ -491,26 +501,13 @@ header {
   }
 }
 
-/* 4k Layout */
+// Footer: 4K/2560px/Widescreen Layout
+
 @include mixins.breakpoint($breakpoint-desktop-4k) {
   .footer {
-    // Use Flexbox for alignment and allow wrapping
-    @include mixins.flex-center(row);
-    flex-wrap: wrap;
-  }
-
-  .footer__nav {
-    // Sets nav to grow & fill the space between the logo and social icons
-    flex-grow: 0.2;
-    display: flex;
-    justify-content: center;
-  }
-
-  .footer__attribution {
-    // Attribution takes full width, forcing it to move to its own line
-    @include mixins.flex-center(row);
-    flex-basis: 100%;
-    gap: $gap-space;
-    margin-bottom: $space-lg;
+    // Increases horizontal padding to move footer text to the right
+    padding-inline: $screen4k-footer-padding;
+    // Adjust spacing between footer logo and nav links
+    column-gap: $space-7xl;
   }
 }

@@ -13,18 +13,18 @@ button {
 button.ios-download {
   background-color: hsl(171, 66%, 44%);
   color: white;
-  box-shadow: 0 3px 0 hsl(171, 66%, 35%), 0 15px 30px hsla(210, 10%, 33%, 0.2);
+  box-shadow: 0 3px 0 #1e9482, 0 15px 30px hsla(210, 10%, 33%, 0.2);
 }
 button.ios-download:hover, button.ios-download:focus-visible {
-  background-color: hsl(171, 66%, 52%);
+  background-color: #34d5bd;
 }
 button.mac-download {
   background-color: hsl(233, 100%, 69%);
   color: white;
-  box-shadow: 0 3px 0 hsl(233, 100%, 55%), 0 15px 30px hsla(210, 10%, 33%, 0.2);
+  box-shadow: 0 3px 0 #1a34ff, 0 15px 30px hsla(210, 10%, 33%, 0.2);
 }
 button.mac-download:hover, button.mac-download:focus-visible {
-  background-color: hsl(233, 100%, 77%);
+  background-color: #8a97ff;
 }
 
 html {
@@ -181,6 +181,12 @@ header p {
   padding: 0;
   text-align: center;
 }
+@media (min-width: 768px) {
+  .features-split .features-split__list {
+    max-width: 24.875rem;
+    margin: 0 auto;
+  }
+}
 .features-split .features-split__item {
   padding: 1rem;
 }
@@ -192,6 +198,9 @@ header p {
     width: 100%;
     column-gap: 0.75rem;
   }
+  .features-split h3 {
+    margin-top: 0;
+  }
   .features-split img {
     justify-self: end;
     transform: translateX(-4rem);
@@ -201,7 +210,8 @@ header p {
   .features-split .features-split__list {
     max-width: 23rem;
     text-align: left;
-    padding-left: 0;
+    margin-inline: 0;
+    padding-left: 1rem;
   }
 }
 
@@ -251,9 +261,6 @@ header p {
   height: 2.5rem;
   margin-bottom: 2rem;
 }
-.features-section__list-item--last {
-  max-width: 28rem;
-}
 .features-section__description--last br {
   display: none;
 }
@@ -265,10 +272,9 @@ header p {
 @media (min-width: 768px) {
   .features-section__list {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
   }
 }
 @media (min-width: 1440px) {
@@ -337,16 +343,19 @@ header p {
 
 .footer {
   background-color: hsl(220, 16%, 96%);
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
 }
 .footer .footer__logo {
   width: 4rem;
 }
 .footer__social {
   padding: 0;
-  padding-top: 3rem;
   list-style: none;
-  text-align: center;
 }
 .footer__social-item {
   display: inline;
@@ -356,7 +365,7 @@ header p {
   font-size: 0.688rem;
   text-align: center;
   color: hsl(210, 10%, 33%);
-  margin-top: 2rem;
+  margin-top: 0;
 }
 .footer__attribution .attribution__link {
   color: hsl(228, 45%, 44%);
@@ -371,7 +380,7 @@ header p {
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
-  margin-top: 2.5rem;
+  margin-top: 0;
 }
 
 .footer__nav-link {
@@ -386,15 +395,18 @@ header p {
   .footer {
     display: grid;
     grid-template-columns: auto auto 1fr;
-    grid-template-areas: "footer__logo nav social" "attribution attribution attribution";
+    grid-template-areas: "logo nav social" "attribution attribution attribution";
     align-items: center;
     column-gap: 2.5rem;
     row-gap: 2rem;
-    padding: 2rem 4rem;
+    padding: 4rem 4rem;
     margin-top: 0;
   }
   .footer__nav {
     grid-area: nav;
+  }
+  .footer__logo {
+    grid-area: logo;
   }
   .footer__social {
     grid-area: social;
@@ -426,7 +438,7 @@ header p {
 }
 @media (min-width: 1440px) {
   .footer {
-    padding: 2rem 8rem;
+    padding-inline: 8rem;
     column-gap: 8rem;
   }
   .footer__social {
@@ -440,29 +452,9 @@ header p {
     width: max-content;
   }
 }
-/* 4k Layout */
 @media (min-width: 2560px) {
   .footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    padding-inline: 30rem;
+    column-gap: 9rem;
   }
-  .footer__nav {
-    flex-grow: 0.2;
-    display: flex;
-    justify-content: center;
-  }
-  .footer__attribution {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 100%;
-    gap: 0.3rem;
-    margin-bottom: 2rem;
-  }
-}
-
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */
